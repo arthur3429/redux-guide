@@ -1,7 +1,10 @@
-import { createStore } from "redux";
+//Esse arquivo é a base do redux
 
-import rootReducer from "./root-reducer";
+import { createStore, applyMiddleware } from 'redux' //Ele está deprecated porque o recomendado é usar o redux toolkit
+import logger from 'redux-logger'
 
-const store = createStore(rootReducer);
+import rootReducer from './root-reducer'
 
-export default store;
+const store = createStore(rootReducer, applyMiddleware(logger)) // O store é o que armazena o root reducer, ou seja, armazena o estado 
+
+export default store

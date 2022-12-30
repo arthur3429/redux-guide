@@ -1,0 +1,58 @@
+## Passos para usar redux numa aplicação
+
+instalar os pacotes redux e react-redux
+
+Criar a pasta redux dentro de SRC 
+
+Criar o arquivo STORE.JS
+// O store é o arquivo base do redux, é ele quem armazena o estado da minha aplicação.
+
+Criar o arquivo Root Reducer
+//Esse é o reducer principal, ele armazena todos os outros reducers da aplicação aqui
+
+Criar os Reducers
+//O reducer é uma função que serve para processar as acções e atualizar o estado da aplicação.
+
+Inserir o Provider com a store em volta da minha aplicação no index.js
+
+##Configurando os reducers: 
+
+Um Reducer é escrito no formato (ESTADO ANTERIOR + AÇÃO) => PRÓXIMO ESTADO, ou seja, ele sempre recebe o estado atual (ou inicial) da aplicação e retorna um novo estado por cima.
+Seu modelo é o seguinte:
+
+//é importante que o state tenha um valor inicial
+const initialState = {
+    currentUser: null,
+}
+
+const userReducer = (state = currentUser, action) => {
+    switch(action.type) {
+        case 'user/login':
+            return { ...state, currentUser: action.payload }
+        case 'user/logout': 
+            return { ...state, currentUser: null }
+        default:
+            return state
+    }   
+}
+
+Isso é basicamente uma simples função que serve para dizer que uma coisa mandou fazer outra coisa... 
+
+##dispatch
+
+const dispatch = useDispatch() //Isso é um hook do redux
+
+O dispatch é uma função do redux que serve para enviar as ações para a Store de forma controlada e previsivel.
+
+Ela pode ser usada num evento de clique e serve para ativar a modificação do estado, por exemplo... 
+
+dispatch({
+    type: 'user/login',
+    payload: {
+        nome: 'Arthur',
+        email: 'arthur3429@gmail.com'
+    }
+})
+
+e aí básicamente eu chamando isso dentro de uma função que lida com um evento de clique eu estou despachando para minha aplicação um novo estado com type 'user/login' e os dados da payload (que pode existir ou não)
+

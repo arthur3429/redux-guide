@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { selectProductsCount } from "../../redux/cart/cart.selectors";
 import { loginUser, logoutUser } from "../../redux/user/actions";
 
 // Components
@@ -16,10 +17,12 @@ function Header() {
   const { currentUser } = useSelector(rootReducer => rootReducer.userReducer)
   const dispatch = useDispatch()
 
+  const productsCount = useSelector(selectProductsCount)
+
   const handleCartClick = () => {
     setCartIsVisible(true);
   };
-  console.log(currentUser)
+
   const handleLoginClick = () => {
     dispatch(loginUser({ name: "Arthur", email: "arthur3429@gmail.com"}))
   }
@@ -30,17 +33,19 @@ function Header() {
 
 
   return (
-    <Styles.Container>
-      <div className="header-wrapper">
-      <Styles.Logo>Redux Shopping</Styles.Logo>
-      <Styles.Buttons>
-        {currentUser ? <div onClick={handleLogoutClick}>Sair</div> : <div onClick={handleLoginClick}>Login</div>}
-        <div onClick={handleCartClick}>Carrinho</div>
-      </Styles.Buttons>
+    <Styles.HeaderPlaceholder>   
+      <Styles.Container>
+        <div className="header-wrapper">
+        <Styles.Logo><img src="/logo.png" alt="Logo" /></Styles.Logo>
+        <Styles.Buttons>
+          {currentUser ? <div onClick={handleLogoutClick}>Sair</div> : <div onClick={handleLoginClick}>Login</div>}
+          <div onClick={handleCartClick}>Carrinho ({productsCount})</div>
+        </Styles.Buttons>
 
-      <Cart isVisible={cartIsVisible} setIsVisible={setCartIsVisible} />
-      </div>
-    </Styles.Container>
+        <Cart isVisible={cartIsVisible} setIsVisible={setCartIsVisible} />
+        </div>
+      </Styles.Container>
+    </Styles.HeaderPlaceholder>
   );
 }
 

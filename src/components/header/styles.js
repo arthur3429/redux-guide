@@ -1,12 +1,21 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const HeaderPlaceholder = styled.div`
+  height: 100px;
   width: 100%;
-  background-color: #111;
+`
+
+export const Container = styled.div`
+  position: fixed;
+  top: 0;
+  background: rgba(246, 246, 248, 0.9);
+  box-shadow: 0 0 15px rgb(0 0 0 / 10);
+  width: 100%;
   display: flex;
   justify-content: center;
-  color: #eee;
-  padding: 20px;
+  align-items: center;
+  height: 100px;
+  color: #151515;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 
   .header-wrapper {
@@ -18,8 +27,9 @@ export const Container = styled.div`
 `;
 
 export const Logo = styled.div`
-  font-family: 'Pacifico', cursive;
-  font-size: 22px;
+  img {
+    max-width: 120px;
+  }
 `;
 
 export const Buttons = styled.div`
